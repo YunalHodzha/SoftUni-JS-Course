@@ -1,15 +1,11 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.render('home');
-});
-
-router.get('/catalog', (req, res) => {
-    res.render('catalog');
+    res.render('home/home')
 });
 
 router.get('/search', (req, res) => {
-    res.render('search');
-})
+    res.render('home/search')
+});
 
 module.exports = router;

@@ -1,29 +1,27 @@
 const express = require('express');
 
-const expressConfig = require('./config/expressConfig.js');
-const handlebarsConfig = require('./config/handlebarsConfig.js');
-const dbConnect = require('./config/dbConfig.js');
-const routes = require('./routes.js');
-
+const expressConfig = require('./config/expressConfig');
+const handlebarsConfig = require('./config/handlebarsConfig');
+const dbConnect = require('./config/dbConfig');
+const routes = require('./routes');
 
 const PORT = 3000;
 
-
 const app = express();
+
 expressConfig(app);
 handlebarsConfig(app);
 
 dbConnect()
-    .then(() => console.log('DB Conected successfully'))
+    .then(() => console.log('DB Connected successfully!'))
     .catch((err) => {
         console.log("DB error: ", err);
-    })
+    });
 
 app.use(routes);
 
-app.listen(PORT, () => { console.log(`Server is listening ${PORT}...`) });
+app.get('/*', (req, res) => {
+    res.render('404');
+});
 
-
-
-
-
+app.listen(PORT, () => { console.log(`Server is running on port ${PORT}...`) });

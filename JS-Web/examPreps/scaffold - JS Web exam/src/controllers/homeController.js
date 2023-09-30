@@ -5,6 +5,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/catalog', (req, res) => {
+
+    
     res.render('home/catalog')
 });
 

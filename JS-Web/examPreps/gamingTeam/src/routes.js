@@ -1,10 +1,12 @@
 const router = require('express').Router();
-const homeController = require('./controllers/homeController.js');
-const gamesController = require('./controllers/gamesController.js');
-const usersController = require('./controllers/userController.js');
+const homeController = require('./controllers/homeController');
+const userController = require('./controllers/userController');
+const itemController = require('./controllers/itemController');
 
-router.use(homeController);
-router.use('/games', gamesController);
-router.use('/users', usersController);
+router.use('/', homeController);
+router.use('/home', homeController);
+router.use('/users', userController);
+router.use('/items', itemController);
+
 
 module.exports = router;
