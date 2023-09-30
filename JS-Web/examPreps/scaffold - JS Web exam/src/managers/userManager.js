@@ -7,7 +7,7 @@ const { SECRET } = require('../config/config');
 exports.login = async (email, password) => {
     const user = await User.findOne({ email });
     if (!user) {
-        throw new Error('Email is required!');
+        throw new Error('Email and Password are required!');
     }
 
     if (password === '') {

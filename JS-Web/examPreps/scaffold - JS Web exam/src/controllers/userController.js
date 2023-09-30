@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
         return res.render('users/register', { errorMessage });
     }
 
-    res.render('users/login');
+    res.redirect('/users/login');
 });
 
 router.get('/logout', (req, res) => {
