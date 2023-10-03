@@ -2,7 +2,19 @@ const Item = require('../models/Item');
 
 exports.create = (itemData) => Item.create(itemData);
 
-exports.getAll = () => Item.find();
+exports.getAll = async (search, platform) => {
+    let result = await Item.find().lean();
+
+    if (search) {
+        result = result.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+    };
+
+    if (platform) {
+        result = result.filter(item => item.platform.toLowerCase().includes(platform.toLowerCase()));
+    };
+
+    return result;
+}
 
 exports.getItemDetailsById = (itemId) => Item.findById(itemId);
 
@@ -29,5 +41,5 @@ exports.buy = async (itemId, userId) => {
 
     item.boughtBy.push(userId);
 
-    await item.save();    
+    await item.save();
 }

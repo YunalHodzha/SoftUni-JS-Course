@@ -5,7 +5,7 @@ const { getSelectedOption } = require('../utils/viewHelper');
 
 router.get('/catalog', async (req, res) => {
 
-    const items = await itemManager.getAll().lean();
+    const items = await itemManager.getAll();
 
     res.render('items/catalog', { items });
 });
