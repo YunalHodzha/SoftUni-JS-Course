@@ -33,15 +33,23 @@ router.post('/create', async (req, res) => {
 
 router.get('/details/:itemId', async (req, res) => {
     const itemId = req.params.itemId;
-
+    const userId = req.user?._id;
 
     try {
         const item = await itemManager.getItemDetailsById(itemId).lean();
 
         const isOwner = req.user?._id == item.owner;
+        const isUser = req.user?._id;
 
-        res.render('items/details', { item, isOwner });
+        if (!isOwner && isUser) {
+            const isBought = await itemManager.isAlreadyBought(itemId, userId);
+
+            res.render('items/details', { item, isOwner, isUser, isBought });
+        } else {
+            res.render('items/details', { item, isOwner });
+        };
     } catch (err) {
+        console.error(err);
         res.redirect('/404');
     }
 });
@@ -93,6 +101,19 @@ router.get('/edit/:itemId/delete', async (req, res) => {
         res.render(`/items/${req.params.itemId}/details`, { error: 'Unsuccessful item deletion' });
     }
 
+});
+
+router.get('/details/:itemId/buy', async (req, res) => {
+    const itemId = req.params.itemId;
+    const userId = req.user._id;
+
+    try {
+        await itemManager.buy(itemId, userId);
+
+        res.redirect(`/items/details/${itemId}`);
+    } catch (err) {
+        return res.render(`items/details/${itemId}`, {error: 'Unsuccessful operation'});
+    }
 });
 
 module.exports = router;
