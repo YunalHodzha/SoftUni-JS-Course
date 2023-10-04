@@ -14,7 +14,7 @@ exports.getAll = async (search, platform) => {
     };
 
     return result;
-}
+};
 
 exports.getItemDetailsById = (itemId) => Item.findById(itemId);
 
@@ -42,4 +42,4 @@ exports.buy = async (itemId, userId) => {
     item.boughtBy.push(userId);
 
     await item.save();
-}
+};
