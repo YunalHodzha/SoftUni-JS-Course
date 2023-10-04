@@ -3,7 +3,7 @@ const Item = require('../models/Item');
 exports.create = (itemData) => Item.create(itemData);
 
 exports.getAll = async () => {
-    
+
     let result = await Item.find().lean();
 
     // if (search) {
@@ -45,4 +45,13 @@ exports.vote = async (itemId, userId) => {
     item.votes.push(userId);
 
     await item.save();
+}
+
+exports.getVotesCount = async (itemId) => {
+    const item = await Item.findById(itemId).lean();
+
+    console.log(item.votes)
+    const votesCount = item.votes.length;
+
+    return votesCount;
 }

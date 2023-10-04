@@ -52,9 +52,10 @@ router.get('/details/:itemId', async (req, res) => {
         if (isUser) {
             const isOwner = req.user?._id == item.owner;
             const voted = await itemManager.isAlreadyVoted(itemId, userId);
-            console.log(voted);
+            
+            const votesCount = await itemManager.getVotesCount(itemId);
 
-            res.render(`items/details`, { item, isOwner, isUser, ownerName, voted });
+            res.render(`items/details`, { item, isOwner, isUser, ownerName, voted, votesCount });
         } else {
             res.render(`items/details`, { item, ownerName });
         }
