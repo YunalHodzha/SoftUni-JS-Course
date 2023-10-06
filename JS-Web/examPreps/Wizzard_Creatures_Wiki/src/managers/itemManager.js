@@ -35,16 +35,16 @@ exports.isAlreadyVoted = async (itemId, userId) => {
     return isVoted;
 };
 
-exports.vote = async (itemId, userId) => {
+exports.vote = async (itemId, user) => {
     const item = await Item.findById(itemId);
 
     if (!item) {
         return res.status(404);
     }
 
-    item.votes.push(userId);
+    item.votes.push(user);
 
-    await item.save();
+    return item.save();
 }
 
 exports.getVotesCount = async (itemId) => {

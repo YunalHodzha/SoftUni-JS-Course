@@ -52,7 +52,7 @@ router.get('/details/:itemId', async (req, res) => {
         if (isUser) {
             const isOwner = req.user?._id == item.owner;
             const voted = await itemManager.isAlreadyVoted(itemId, userId);
-            
+
             const votesCount = await itemManager.getVotesCount(itemId);
 
             res.render(`items/details`, { item, isOwner, isUser, ownerName, voted, votesCount });
@@ -66,14 +66,15 @@ router.get('/details/:itemId', async (req, res) => {
 
 router.get('/details/:itemId/vote', async (req, res) => {
     const itemId = req.params.itemId;
-    const userId = req.user._id;
+    const user = req.user._id;
 
     try {
-        await itemManager.vote(itemId, userId);
+        await itemManager.vote(itemId, user);
 
-        res.redirect(`/items/details/${itemId}`);
+        res.render(`/items/details/${itemId}`);
     } catch (err) {
-        return res.render(`items/details/${itemId}`, {error: 'Unsuccessful operation'});
+        const errorMessage = extractErrorMessages(err);
+        return res.redirect(`/items/details/${itemId}`, { errorMessage });
     }
 });
 

@@ -27,12 +27,17 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Description is required!']
     },
-    votes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+    votes: [
+        {
+            user: {
+                type: mongoose.Types.ObjectId,
+                required: true,
+                ref: 'User'
+            }
+        }
+    ],
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'User'
     }
 });
