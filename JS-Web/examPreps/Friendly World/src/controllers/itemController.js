@@ -7,6 +7,8 @@ router.get('/dashboard', async (req, res) => {
 
     const items = await itemManager.getAll().lean();
 
+    console.log(items)
+
     res.render('items/dashboard', { items });
 });
 
@@ -20,15 +22,16 @@ router.post('/create', async (req, res) => {
         owner: req.user._id
     };
 
+    itemData.years = Number(itemData.years)
+    
     try {
         await itemManager.create(itemData);
 
+        res.render('items/dashboard');
     } catch (err) {
         const errorMessage = extractErrorMessages(err);
-        return res.render('items/create', { errorMessage });
+        res.render('items/create', { errorMessage });
     }
-
-    res.redirect('/items/catalog');
 });
 
 router.get('/details/:itemId', async (req, res) => {

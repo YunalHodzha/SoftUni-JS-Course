@@ -25,10 +25,12 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    const { username, email, password, 're' } = req.body;
+    const email = req.body.email;
+    const password = req.body.password;
+    const repeatPassword = req.body['repeat-password'];
 
     try {
-        await userManager.register(({ username, email, password, repeatPassword }));
+        await userManager.register(({ email, password, repeatPassword }));
     } catch (err) {
         const errorMessage = extractErrorMessages(err);
 

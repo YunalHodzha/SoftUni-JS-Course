@@ -11,11 +11,13 @@
 
 <body>
 
+    {{#if errorMessage}}
     <div>
         <div class="errorContainer">
-            <p>Error</p>
+            <p>{{errorMessage}}</p>
         </div>
     </div>
+    {{/if}}
 
     <div id="wrapper">
         <header>

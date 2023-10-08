@@ -15,7 +15,7 @@ const itemSchema = new mongoose.Schema({
         required: [true, 'Years is required!']
     },
     kind: {
-        type: Number,
+        type: String,
         minlength: [3, 'Name must be atleast 3 characters long!'],
         required: [true, 'Kind is required!']
     },

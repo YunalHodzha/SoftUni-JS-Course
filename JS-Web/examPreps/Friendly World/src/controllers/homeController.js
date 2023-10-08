@@ -3,7 +3,7 @@ const itemManager = require('../managers/itemManager');
 
 router.get('/', async (req, res) => {
 
-    const items = await itemManager.getAll();
+    const items = await itemManager.getAll().lean();
 
     res.render('home/home', { items })
 });
