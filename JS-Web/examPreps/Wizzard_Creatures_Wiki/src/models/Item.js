@@ -21,7 +21,8 @@ const itemSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: [true, 'Image is required!']
+        required: [true, 'Image is required!'],
+        match: [/^http?s:\/\/.+/, 'Provide valid creature image link!']
     },
     description: {
         type: String,
@@ -29,11 +30,8 @@ const itemSchema = new mongoose.Schema({
     },
     votes: [
         {
-            user: {
-                type: mongoose.Types.ObjectId,
-                required: true,
-                ref: 'User'
-            }
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
         }
     ],
     owner: {

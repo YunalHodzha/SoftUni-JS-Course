@@ -17,7 +17,7 @@ exports.getAll = async () => {
     return result;
 }
 
-exports.getItemDetailsById = (itemId) => Item.findById(itemId);
+exports.getItemDetailsById = (itemId) => Item.findById(itemId).populate('votes');
 
 exports.update = (itemId, itemData) => Item.findByIdAndUpdate(itemId, itemData);
 
@@ -45,13 +45,6 @@ exports.vote = async (itemId, user) => {
     item.votes.push(user);
 
     return item.save();
-}
+};
 
-exports.getVotesCount = async (itemId) => {
-    const item = await Item.findById(itemId).lean();
-
-    console.log(item.votes)
-    const votesCount = item.votes.length;
-
-    return votesCount;
-}
+exports.getMyItems = (ownerId) => Item.find({owner: ownerId}).populate("owner");

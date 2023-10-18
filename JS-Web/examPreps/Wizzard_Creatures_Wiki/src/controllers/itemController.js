@@ -3,6 +3,8 @@ const itemManager = require('../managers/itemManager');
 const { extractErrorMessages } = require('../utils/errorHelpers');
 const { getSelectedOption } = require('../utils/viewHelper');
 const userManager = require('../managers/userManager');
+const { it } = require('mocha');
+const { isAuth } = require('../middleware/authMiddleware');
 
 router.get('/catalog', async (req, res) => {
 
@@ -18,7 +20,7 @@ router.get('/catalog', async (req, res) => {
 
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render('items/create');
 });
 
@@ -49,13 +51,13 @@ router.get('/details/:itemId', async (req, res) => {
         const ownerDetails = await userManager.findUserById(item.owner).lean();
         const ownerName = `${ownerDetails.firstName} ${ownerDetails.lastName}`;
 
+        const votedUserEmails = item.votes.map((v) => v.email).join(', ');
+
         if (isUser) {
             const isOwner = req.user?._id == item.owner;
-            const voted = await itemManager.isAlreadyVoted(itemId, userId);
+            const hasVoted = await itemManager.isAlreadyVoted(itemId, userId);
 
-            const votesCount = await itemManager.getVotesCount(itemId);
-
-            res.render(`items/details`, { item, isOwner, isUser, ownerName, voted, votesCount });
+            res.render(`items/details`, { item, isOwner, isUser, ownerName, hasVoted, votedUserEmails });
         } else {
             res.render(`items/details`, { item, ownerName });
         }
@@ -71,7 +73,7 @@ router.get('/details/:itemId/vote', async (req, res) => {
     try {
         await itemManager.vote(itemId, user);
 
-        res.render(`/items/details/${itemId}`);
+        res.redirect(`/items/details/${itemId}`);
     } catch (err) {
         const errorMessage = extractErrorMessages(err);
         return res.redirect(`/items/details/${itemId}`, { errorMessage });
@@ -86,10 +88,10 @@ router.get('/edit/:itemId', async (req, res) => {
 
         const isOwner = req.user?._id == item.owner;
 
-        const options = getSelectedOption(item.platform);
+        //const options = getSelectedOption(item.platform);
 
         if (isOwner) {
-            res.render('items/edit', { item, options });
+            res.render('items/edit', { item });
         } else {
             throw new Error('Not Authorized!')
         }
@@ -101,7 +103,7 @@ router.get('/edit/:itemId', async (req, res) => {
 
 router.post('/edit/:itemId', async (req, res) => {
     const itemId = req.params.itemId;
-    console.log(itemId);
+
     try {
         const item = req.body;
 
@@ -116,7 +118,7 @@ router.post('/edit/:itemId', async (req, res) => {
     }
 });
 
-router.get('/edit/:itemId/delete', async (req, res) => {
+router.get('/delete/:itemId', async (req, res) => {
 
     try {
         await itemManager.delete(req.params.itemId);

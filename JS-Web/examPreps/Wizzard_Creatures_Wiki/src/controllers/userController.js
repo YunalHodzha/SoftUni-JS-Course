@@ -1,10 +1,12 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager');
+const itemManager = require('../managers/itemManager');
 const { extractErrorMessages } = require('../utils/errorHelpers');
+const { isAuth } = require('../middleware/authMiddleware');
 
 router.get('/login', (req, res) => {
     res.render('users/login');
-})
+});
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -50,6 +52,15 @@ router.get('/logout', (req, res) => {
     res.clearCookie('auth');
 
     res.redirect('/');
-})
+});
+
+//Render Profile
+router.get('/my-posts', isAuth, async (req, res) => {
+    const { user } = req;
+
+    const myItems = await itemManager.getMyItems(user?._id).lean();
+
+    res.render('users/my-posts', { myItems });
+});
 
 module.exports = router;
