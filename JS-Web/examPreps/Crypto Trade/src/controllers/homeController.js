@@ -1,4 +1,5 @@
 const itemManager = require('../managers/itemManager');
+const { isAuth } = require('../middleware/authMiddleware');
 
 const router = require('express').Router();
 
@@ -6,11 +7,9 @@ router.get('/', (req, res) => {
     res.render('home/home')
 });
 
-router.get('/search', async (req, res) => {
+router.get('/search', isAuth, async (req, res) => {
 
     const { search, payment } = req.query;
-
-    console.log(search)
 
     const items = await itemManager.search(search, payment);
 

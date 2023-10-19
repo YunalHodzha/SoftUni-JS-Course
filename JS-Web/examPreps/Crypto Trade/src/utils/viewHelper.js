@@ -24,7 +24,8 @@ exports.getSelectedOption = (platform) => {
         'PayPal',
     ];
 
-    const options = titles.map((title) => ({
+
+    let options = titles.map((title) => ({
         title: `${title}`,
         value: `${title}`,
         selected: `${title}` === payment,

@@ -22,6 +22,7 @@ exports.delete = (itemID) => Item.findByIdAndDelete(itemID);
 //     return item.save();
 // };
 
+
 // exports.isAlreadyBought = async (item, userId) => {
 
 //     const buyersList = Object.values(item.boughtBy);
@@ -29,4 +30,20 @@ exports.delete = (itemID) => Item.findByIdAndDelete(itemID);
 //     const isBought = buyersList.map(buyer => buyer.toString()).includes(userId);
 
 //     return isBought;
+// };
+
+
+// exports.search = async (search, payment) => {
+//     let result = await this.getAll().lean();
+
+
+//     if (search) {
+//         result = result.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+//     };
+
+//     if (payment) {
+//         result = result.filter(item => item.payment.toLowerCase().includes(payment.toLowerCase()));
+//     };
+
+//     return result;
 // };

@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const itemManager = require('../managers/itemManager');
+const { isAuth } = require('../middleware/authMiddleware');
 const { extractErrorMessages } = require('../utils/errorHelpers');
 const { getSelectedOption } = require('../utils/viewHelper');
 
-router.get('/catalog', async (req, res) => { 
+router.get('/catalog', async (req, res) => {
 
     try {
         const items = await itemManager.getAll().lean();
@@ -15,7 +16,7 @@ router.get('/catalog', async (req, res) => {
     }
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render('items/create');
 });
 
@@ -75,7 +76,7 @@ router.get('/edit/:itemId', async (req, res) => {
 
 router.post('/edit/:itemId', async (req, res) => {
     const itemId = req.params.itemId;
-    console.log(itemId);
+
     try {
         const item = req.body;
 
@@ -92,7 +93,7 @@ router.post('/edit/:itemId', async (req, res) => {
     }
 });
 
-router.get('/delete/:itemId', async (req, res) => {
+router.get('/delete/:itemId', isAuth, async (req, res) => {
 
     try {
         await itemManager.delete(req.params.itemId);
@@ -104,7 +105,7 @@ router.get('/delete/:itemId', async (req, res) => {
     }
 });
 
-router.get('/details/:itemId/buy', async (req, res) => {
+router.get('/details/:itemId/buy', isAuth,  async (req, res) => {
     const itemId = req.params.itemId;
     const userId = req.user._id;
 

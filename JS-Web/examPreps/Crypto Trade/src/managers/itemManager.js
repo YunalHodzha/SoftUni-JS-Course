@@ -27,14 +27,11 @@ exports.isAlreadyBought = async (item, userId) => {
 };
 
 exports.search = async (search, payment) => {
-    let result = await Item.find().lean();
+    let result = await this.getAll().lean();
 
 
     if (search) {
         result = result.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
-
-        console.log(search);
-
     };
 
     if (payment) {

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const itemManager = require('../managers/itemManager');
+const { isAuth } = require('../middleware/authMiddleware');
 const { extractErrorMessages } = require('../utils/errorHelpers');
 const { getSelectedOption } = require('../utils/viewHelper');
 
@@ -74,9 +75,9 @@ router.get('/edit/:itemId', async (req, res) => {
     };
 });
 
-router.post('/edit/:itemId', async (req, res) => {
+router.post('/edit/:itemId', isAuth, async (req, res) => {
     const itemId = req.params.itemId;
-    console.log(itemId);
+
     try {
         const item = req.body;
 
@@ -85,22 +86,41 @@ router.post('/edit/:itemId', async (req, res) => {
         res.redirect(`/items/details/${itemId}`);
     } catch (err) {
 
+        const item = await itemManager.getItemDetailsById(req.params.itemId).lean();
+        //const options = getSelectedOption(item.payment);
         const errorMessage = extractErrorMessages(err);
         return res.render(`items/edit/${itemId}`, { errorMessage });
 
     }
 });
 
-router.get('/edit/:itemId/delete', async (req, res) => {
+router.get('/edit/:itemId/delete', isAuth, async (req, res) => {
 
     try {
         await itemManager.delete(req.params.itemId);
 
         res.redirect('/items/catalog');
     } catch (err) {
-        res.render(`/items/${req.params.itemId}/details`, { error: 'Unsuccessful item deletion' });
+        res.redirect(`/404`, { error: 'Unsuccessful item deletion' });
     }
 
 });
+
+//TODO Buy Option
+// router.get('/details/:itemId/buy', isAuth, async (req, res) => {
+//     const itemId = req.params.itemId;
+//     const userId = req.user._id;
+
+//     try {
+//         const item = await itemManager.getItemDetailsById(itemId);
+
+//         await itemManager.buy(item, userId);
+
+//         res.redirect(`/items/details/${itemId}`);
+//     } catch (err) {
+//         console.log(err);
+//         res.redirect(`404`);
+//     }
+// });
 
 module.exports = router;
