@@ -3,7 +3,7 @@ const itemManager = require('../managers/itemManager');
 const { extractErrorMessages } = require('../utils/errorHelpers');
 const { getSelectedOption } = require('../utils/viewHelper');
 
-router.get('/catalog', async (req, res) => {
+router.get('/catalog', async (req, res) => { 
 
     try {
         const items = await itemManager.getAll().lean();
@@ -36,7 +36,6 @@ router.post('/create', async (req, res) => {
     res.redirect('/items/catalog');
 });
 
-
 router.get('/details/:itemId', async (req, res) => {
     const itemId = req.params.itemId;
     const userId = req.user?._id;
@@ -46,9 +45,9 @@ router.get('/details/:itemId', async (req, res) => {
 
         const isOwner = userId == item.owner;
 
-        //const isAlreadyBought = await itemManager.isAlreadyBought(item, userId);
+        const isAlreadyBought = await itemManager.isAlreadyBought(item, userId);
 
-        res.render('items/details', { item, isOwner });
+        res.render('items/details', { item, isOwner, isAlreadyBought });
     } catch (err) {
         res.redirect('/404');
     }
@@ -61,7 +60,7 @@ router.get('/edit/:itemId', async (req, res) => {
 
         const isOwner = req.user?._id == item.owner;
 
-        const options = getSelectedOption(item.platform);
+        const options = getSelectedOption(item.payment);
 
         if (isOwner) {
             res.render('items/edit', { item, options });
@@ -85,22 +84,42 @@ router.post('/edit/:itemId', async (req, res) => {
         res.redirect(`/items/details/${itemId}`);
     } catch (err) {
 
+        const item = await itemManager.getItemDetailsById(req.params.itemId).lean();
+        const options = getSelectedOption(item.payment);
         const errorMessage = extractErrorMessages(err);
-        return res.render(`items/edit/${itemId}`, { errorMessage });
 
+        return res.render(`items/edit`, { item, options, errorMessage });
     }
 });
 
-router.get('/edit/:itemId/delete', async (req, res) => {
+router.get('/delete/:itemId', async (req, res) => {
 
     try {
         await itemManager.delete(req.params.itemId);
 
         res.redirect('/items/catalog');
     } catch (err) {
-        res.render(`/items/${req.params.itemId}/details`, { error: 'Unsuccessful item deletion' });
-    }
 
+        res.redirect(`404`, { error: 'Unsuccessful item deletion' });
+    }
 });
+
+router.get('/details/:itemId/buy', async (req, res) => {
+    const itemId = req.params.itemId;
+    const userId = req.user._id;
+
+    try {
+        const item = await itemManager.getItemDetailsById(itemId);
+
+        await itemManager.buy(item, userId);
+
+        res.redirect(`/items/details/${itemId}`);
+    } catch (err) {
+        console.log(err);
+        res.redirect(`404`);
+    }
+});
+
+
 
 module.exports = router;
