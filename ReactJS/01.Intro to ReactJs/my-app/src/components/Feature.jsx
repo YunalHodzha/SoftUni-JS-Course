@@ -18,7 +18,7 @@ export default function Feature() {
                         use it.
                     </p>
                     <a
-                        href="#"
+                        href="#site-footer"
                         className="btn custom-btn bg-color mt-3"
                         data-aos="fade-up"
                         data-aos-delay={300}
