@@ -2,6 +2,8 @@
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Search } from "./components/Search";
+import './App.css'
+import { UserList } from "./components/UserList";
 
 
 
@@ -11,7 +13,12 @@ function App() {
             <Header />
 
             <main className="main">
-                <Search />
+                <section class="card users-container">
+                    <Search />
+
+                    <UserList />
+
+                </section>
 
             </main>
 
