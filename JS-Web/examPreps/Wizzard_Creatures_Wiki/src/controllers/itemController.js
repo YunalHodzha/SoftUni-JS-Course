@@ -3,7 +3,6 @@ const itemManager = require('../managers/itemManager');
 const { extractErrorMessages } = require('../utils/errorHelpers');
 const { getSelectedOption } = require('../utils/viewHelper');
 const userManager = require('../managers/userManager');
-const { it } = require('mocha');
 const { isAuth } = require('../middleware/authMiddleware');
 
 router.get('/catalog', async (req, res) => {

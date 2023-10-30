@@ -1,18 +1,24 @@
-export const UserDetails = ({ _id,
+import { formatDate } from "../utils/dateUtils";
+
+export const UserDetails = ({
+    _id,
     firstName,
     lastName,
     email,
     imageUrl,
     createdAt,
     phoneNumber,
-    updatedAt, }) => {
+    updatedAt,
+    address,
+    onClose
+}) => {
     return (<div className="overlay">
         <div className="backdrop" />
         <div className="modal">
             <div className="detail-container">
                 <header className="headers">
                     <h2>User Detail</h2>
-                    <button className="btn close">
+                    <button className="btn close" onClick={onClose}>
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -33,8 +39,8 @@ export const UserDetails = ({ _id,
                 <div className="content">
                     <div className="image-container">
                         <img
-                            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                            alt=""
+                            src={imageUrl}
+                            alt={`${firstName} ${lastName}`}
                             className="image"
                         />
                     </div>
@@ -54,13 +60,13 @@ export const UserDetails = ({ _id,
                         </p>
                         <p>
                             Address:
-                            <strong> {`${address.country}, ${address.city}, ${address.street} ${address.number}`} </strong>
+                            <strong>  {`${address.country}, ${address.city}, ${address.street} ${address.streetNumber}`}</strong>
                         </p>
                         <p>
-                            Created on: <strong>Wednesday, June 28, 2022</strong>
+                            Created on: <strong>{formatDate(createdAt)}</strong>
                         </p>
                         <p>
-                            Modified on: <strong>Thursday, June 29, 2022</strong>
+                            Modified on: <strong>{formatDate(updatedAt)}</strong>
                         </p>
                     </div>
                 </div>

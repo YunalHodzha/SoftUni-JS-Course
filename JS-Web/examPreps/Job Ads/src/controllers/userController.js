@@ -1,12 +1,10 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager');
-const itemManager = require('../managers/itemManager');
 const { extractErrorMessages } = require('../utils/errorHelpers');
-const { isAuth } = require('../middleware/authMiddleware');
 
 router.get('/login', (req, res) => {
     res.render('users/login');
-});
+})
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -16,7 +14,6 @@ router.post('/login', async (req, res) => {
         res.cookie('auth', token, { httpOnly: true });
     } catch (err) {
         const errorMessage = extractErrorMessages(err);
-
         return res.render('users/login', { errorMessage });
     }
 
@@ -28,39 +25,23 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
+    const { username, email, password, repeatPassword } = req.body;
 
-    const firstName = req.body['first-name'];
-    const lastName = req.body['last-name'];
-    const email = req.body.email;
-    const password = req.body.password;
-    const repeatPassword = req.body['repeat-password'];
-
-
-    console.log(req.body['first-name'])
     try {
-        await userManager.register({ firstName, lastName, email, password, repeatPassword });
-
-        res.redirect('/users/login');
+        await userManager.register(({ username, email, password, repeatPassword }));
     } catch (err) {
         const errorMessage = extractErrorMessages(err);
-        console.log(errorMessage)
-        res.render('users/register', { errorMessage });
+
+        return res.render('users/register', { errorMessage });
     }
+
+    res.redirect('/users/login');
 });
 
 router.get('/logout', (req, res) => {
     res.clearCookie('auth');
 
     res.redirect('/');
-});
-
-//Render Profile
-router.get('/my-posts', isAuth, async (req, res) => {
-    const { user } = req;
-
-    const myItems = await itemManager.getMyItems(user?._id).lean();
-
-    res.render('users/my-posts', { myItems });
-});
+})
 
 module.exports = router;

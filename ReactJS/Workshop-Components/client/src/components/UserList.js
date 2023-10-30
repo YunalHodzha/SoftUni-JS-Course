@@ -1,23 +1,26 @@
 import { useState } from "react"
 import { User } from "./User"
 import { UserDetails } from "./userDetails";
-
+import * as userService from '../services/userService';
 
 export const UserList = ({
     users
 }) => {
     const [selectedUser, setSelectedUser] = useState(null);
 
-    const onInfoClick = (userId) => {
-        const user = users.find(x => x._id === userId);
+    const onInfoClick = async (userId) => {
+        const user = await userService.getOne(userId);
 
-        if (user) {
-            setSelectedUser(users);
-        }
+        setSelectedUser(user);
     }
+
+    const onClose = () => {
+        setSelectedUser(null);
+    };
+
     return (
         <>
-            {selectedUser && <UserDetails {...selectedUser}/>}
+            {selectedUser && <UserDetails {...selectedUser} onClose={onClose} />}
             <div className="table-wrapper">
                 {/* Overlap components  */}
                 {/* <div class="loading-shade"> */}
