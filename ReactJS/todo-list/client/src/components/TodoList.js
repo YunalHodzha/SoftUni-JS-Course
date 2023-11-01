@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { TodoItem } from "./TodoItem";
 import { AddBtn } from "./AddBtn";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 
 export default function TodoList() {
     const [todos, setTodos] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch('http://localhost:3030/jsonstore/todos')
@@ -13,7 +15,12 @@ export default function TodoList() {
                 setTodos(Object.values(data));
                 console.log(Object.values(data))
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => {
+
+                setLoading(false)
+
+            })
     }, []);
 
     const changeStatusHandler = (_id) => {
@@ -30,6 +37,7 @@ export default function TodoList() {
 
     return (
         <section className="todo-list-container">
+            <>{loading && <LoadingSpinner />}</>
             <h1>Todo List</h1>
 
             <AddBtn />
