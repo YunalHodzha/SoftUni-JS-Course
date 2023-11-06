@@ -11,10 +11,7 @@ export const UserList = () => {
 
       <UserListTable />
     </div>
-    
-
-    <button className="btn-add btn">Add new user</button>
-    {/* Pagination component  */}
+        {/* Pagination component  */}
     {/* <div className="pagination position">
       <div className="limits">
         <span>Items per page:</span>

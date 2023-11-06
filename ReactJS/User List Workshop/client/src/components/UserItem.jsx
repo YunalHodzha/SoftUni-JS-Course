@@ -1,14 +1,31 @@
+import { formatDate } from "../utils/dataUtils"
+
 export const UserItem = (
 
-    { firstName,
+    {
+        userId,
+        firstName,
         lastName,
         email,
         phoneNumber,
         createdAt,
-        imageUrl, }
+        imageUrl,
+        onUserInfoClick = { userInfoClickHangler },
+        onDeleteClick
+    }
 
 
 ) => {
+
+    const infoClickHandler = () => {
+        onUserInfoClick(userId)
+    }
+
+    const deleteClickHandler = () => {
+        onDeleteClick(userId);
+    }
+
+
     return (
         <tr>
             <td>
@@ -22,7 +39,7 @@ export const UserItem = (
             <td>{lastName}</td>
             <td>{email}</td>
             <td>{phoneNumber}</td>
-            <td>{createdAt}</td>
+            <td>{formatDate(createdAt)}</td>
             <td className="actions">
                 <button className="btn edit-btn" title="Edit">
                     <svg
@@ -41,7 +58,7 @@ export const UserItem = (
                         ></path>
                     </svg>
                 </button>
-                <button className="btn delete-btn" title="Delete">
+                <button className="btn delete-btn" title="Delete" onClick={deleteClickHandler}>
                     <svg
                         aria-hidden="true"
                         focusable="false"
@@ -58,7 +75,7 @@ export const UserItem = (
                         ></path>
                     </svg>
                 </button>
-                <button className="btn info-btn" title="Info">
+                <button className="btn info-btn" title="Info" onClick={infoClickHandler}>
                     <svg
                         aria-hidden="true"
                         focusable="false"
