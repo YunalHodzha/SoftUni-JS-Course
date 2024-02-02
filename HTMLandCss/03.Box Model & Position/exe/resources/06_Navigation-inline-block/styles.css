@@ -1,0 +1,43 @@
+body {
+    font-family: Helvetica, sans-serif;
+    padding: 5%;
+}
+
+header .site-title {
+    color: #000;
+    text-decoration: none;
+    font-size: 3em;
+    font-weight: bold;
+    margin-right: 70px;
+}
+
+header {
+    border-bottom: 2px solid #ccc;
+}
+
+header .site-title,
+header nav {
+    display: inline-block;
+}
+
+nav ul {
+    padding: 0 0 0 4em;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    padding: 0 0.05em;
+}
+
+nav a {
+    padding: 0.5em;
+    color: #090;
+    text-decoration: none;
+    
+}
+
+nav a:hover {
+    background-color: #060;
+    color: #fff;
+}
