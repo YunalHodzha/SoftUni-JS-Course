@@ -1,0 +1,30 @@
+body,
+ul,
+li {
+    display: flex;
+}
+
+body {
+    background-color: lightgray;
+}
+
+ul {
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+li {
+    background-color: white;
+    justify-content: center;
+    border: 8px solid black;
+    padding: 3em 1em;
+    margin: 2em 1em;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.3),
+        0 0 0.3em 0 rgba(0, 0, 0, 0.4) inset
+}
+
+img {
+    width: 100%;
+    height: auto;
+    object-fit: scale-down;
+}

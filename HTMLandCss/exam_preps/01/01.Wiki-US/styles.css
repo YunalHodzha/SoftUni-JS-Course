@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Agbalumo&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Agbalumo, sans-serif;
+}
+
+
+
+.site-header {
+    font-size: 1.4em;
+    text-align: center;
+    padding: 2em 2em 0 2em;
+    background-color: #d5ebea;
+
+}
+
+.site-header h1,
+.site-header h3 {
+    border-bottom: 2.5px solid black;
+}
+
+.main-content {
+
+    padding: 2.5em;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.main-content .map {
+    width: 30%;
+    border: 2.5px solid black;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content .map img {
+    width: 100%;
+    border: 1px solid black
+}
+
+.main-content .map .map-p-div {
+    margin-top: 2em;
+    text-align: center;
+    text-indent: 2em;
+}
+
+.main-info {
+    font-size: 1.1em;
+    width: 60%;
+    margin-left: 2em;
+    padding: 1em;
+}
+
+.main-info p {
+    font-size: larger;
+    padding: 1em 0;
+    text-indent: 1.5em;
+}
+
+.facts-header {
+    font-size: 1.2em;
+    border: 1px solid black;
+    display: inline-block;
+    color: white;
+    background-color: black;
+    width: 38%;
+    text-align: center;
+    padding: 2px 0;
+}
+
+.facts-main {
+    background-color: #d5ebea;
+    padding: 1em 2em;
+    ;
+}
+
+.facts-main p {
+    font-size: 1em;
+    padding: 1em 0 0 0;
+}
+
+.facts-main p span {
+    font-weight: 900;
+    font-size: 1.1em;
+}

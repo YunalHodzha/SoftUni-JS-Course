@@ -1,0 +1,32 @@
+body {
+    padding: 3em;
+}
+
+header {
+    display: flex;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    width: 100%;
+    justify-content: space-between;
+}
+
+header p {
+    font-family:Georgia, 'Times New Roman', Times, serif , sans-serif;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+header ul {
+    padding-top: 2EM;
+    display: flex;
+    list-style-type: none;
+}
+
+li {
+    
+    padding: 0.5em;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(0, 153, 0);
+}

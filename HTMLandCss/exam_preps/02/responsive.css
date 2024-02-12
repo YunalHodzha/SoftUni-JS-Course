@@ -1,0 +1,49 @@
+@media (max-width: 600px) {
+    .placeholder {
+        height: auto;
+    }
+
+    .parallax-window {
+        height: auto;
+    }
+
+    .tm-header {
+        position: relative;
+
+    }
+
+    .tm-header-inner {
+        justify-content: center;
+    }
+
+    .tm-site-text-box {
+        text-align: center;
+    }
+
+
+    .tm-cta-section {
+        width: auto;
+    }
+
+    .tm-cta-section .row {
+        flex-direction: column;
+    }
+
+    .tm-welcome-section {
+        width: 75%;
+        justify-content: center;
+    }
+
+    .tm-section-title {
+        width: 80%;
+        margin-left: -2px;
+    }
+
+    .tm-gallery-page {
+        margin: 0;
+    }
+
+    .tm-gallery-item {
+        width: 90%;
+    }
+}

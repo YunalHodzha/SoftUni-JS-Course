@@ -1,0 +1,144 @@
+html {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+header,
+aside,
+section,
+footer {
+    background-color: lightskyblue;
+}
+
+header {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    padding: 0.5em 1em;
+    margin-bottom: 0.5em;
+}
+
+header h1 {
+    display: flex;
+    align-items: baseline;
+    height: 50%;
+}
+
+.header-nav {
+    display: flex;
+    width: 100%;
+}
+
+.header-nav ul {
+    display: flex;
+    width: 70%;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+
+.header-nav ul li {
+    list-style-type: none;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+main {
+    display: flex;
+    width: 100%;
+    height: 60vh;
+    margin-bottom: 0.5em;
+}
+
+main aside {
+    width: 20%;
+    /* Correct the typo from 20%s to 20% */
+    margin-right: 0.5em;
+}
+
+main aside nav {
+    padding: 0.5em 0.5em;
+    display: flex;
+    justify-content: flex-start;
+}
+
+main aside ul {
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+}
+
+main aside li {
+    padding: 0.3em 0;
+    list-style-type: none;
+    /* This removes the bullet points */
+}
+
+main aside a {
+    color: darkviolet;
+    text-decoration: none;
+    /* This removes the underline from links */
+}
+
+
+main section {
+    padding-left: 1em;
+    width: 100%;
+}
+
+footer {
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    body {
+        flex-direction: column;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    header h1 {
+        width: 100%;
+    }
+
+    .header-nav ul {
+        flex-direction: column;
+        display: block;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header-nav a {
+        padding-left: 5px;
+        display: block;
+    }
+
+    main {
+        box-sizing: border-box;
+        flex-direction: column;
+        height: auto;
+    }
+
+    main aside {
+        margin-bottom: 0.5em;
+        width: auto;
+        margin-right: 0;
+    }
+}

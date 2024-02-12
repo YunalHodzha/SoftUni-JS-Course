@@ -1,0 +1,33 @@
+body {
+    padding: 3em;
+    background-color: rgb(238, 238, 238);
+}
+
+.site-header {
+    border-top: 1px solid red;
+    display: absolute;
+    border-bottom: 2px solid black;
+    padding: -2em;
+    height: auto;
+    li, p {
+        border-top: 1px solid red;
+        display: inline-block;
+    }
+
+    .title {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 2em;
+        font-weight: bold;
+        position: relative;
+        top: 70px;
+    }
+
+    ul {
+        position: sticky;
+        
+        display: inline-block;
+        border: 1px solid green;
+        text-align: left;
+        left: 500px;
+    }
+}

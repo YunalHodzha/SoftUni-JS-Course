@@ -1,0 +1,21 @@
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    max-width: 15vw;
+    height: 20rem;
+    flex-direction: column-reverse;
+    gap: 0.5em;
+    flex-wrap: wrap;
+}
+
+.container span {
+    border: 1px solid black;
+    width: 70px;
+    height: 33px;
+}
