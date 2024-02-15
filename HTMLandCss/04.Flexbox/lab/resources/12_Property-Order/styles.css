@@ -7,18 +7,18 @@
 }
 
 #box1 {
-  order: 3;
   background-color: pink;
+  order: 2;
 }
 
 #box2 {
-  order: 1;
   background-color: lightgreen;
+  order: 0;
 }
 
 #box3 {
-  order: 2;
   background-color: lightblue;
+  order: 1;
 }
 
 .flex-container > div {
@@ -27,3 +27,4 @@
   padding: 20px;
   font-size: 30px;
 }
+
