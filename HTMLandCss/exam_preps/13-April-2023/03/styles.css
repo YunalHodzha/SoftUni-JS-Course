@@ -1,0 +1,248 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, sans-serif;
+}
+
+.site-header {
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 2em;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.site-header p {
+    margin: auto 2em;
+}
+
+.site-header nav ul {
+    display: flex;
+    list-style-type: none;
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    li {
+        padding: 0.6em;
+    }
+}
+
+.first {
+    background-color: #84DCFF;
+    display: flex;
+    padding: 0 4em;
+    height: 25em;
+}
+
+.first .main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2em;
+    margin-right: 8em;
+}
+
+.first .media img {
+    height: 100%;
+}
+
+.first .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    font-size: 0.9em;
+}
+
+.first .buttons a:first-of-type {
+    text-decoration: none;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: black;
+    padding: 0.9em 3em;
+    border-radius: 7px;
+    border: 1px solid black;
+    font-weight: 550;
+}
+
+.first .buttons a:last-of-type {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    text-align: center;
+    padding: 0.9em 3em;
+    border-radius: 7px;
+    margin-left: 1.7em;
+    font-weight: 550;
+}
+
+.second {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.second header {
+    text-align: center;
+}
+
+.second main {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.second main .card {
+    width: 25%;
+    text-align: center;
+    margin: 2.5em auto;
+}
+
+.second header h3,
+.second header p {
+    margin: 1em auto;
+    width: 70%;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.second main .card i {
+    color: #84DCFF;
+    font-size: 7em;
+}
+
+.second main .card p:first-of-type {
+    margin: 2em auto;
+    font-weight: bold;
+
+}
+
+.third {
+    background-color: #84DCFF;
+    padding-bottom: 3em;
+}
+
+.third header h2 {
+    text-align: center;
+    padding: 2em 0 1em 0;
+}
+
+.third main ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.third main li {
+    width: 30%;
+    margin: 0.2em 2em;
+    display: flex;
+    align-items: center;
+}
+
+.third main li::before {
+    content: "\2022";
+    /* Unicode character for bullet point */
+    color: black;
+    /* Color of the big disk */
+    font-size: 5em;
+    /* Adjust the size as needed */
+    margin-right: 5px;
+}
+
+.third main .button {
+    text-align: center;
+    margin: 3em auto;
+}
+
+.third main .button a {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 1.2em 4.5em;
+    border-radius: 7px;
+    font-size: 0.9em;
+}
+
+.fourth header {
+    text-align: center;
+    margin: 2em auto;
+}
+
+.fourth header h2 {
+    font-size: 3em;
+    font-weight: bolder;
+}
+
+.fourth header h2,
+.fourth header p {
+    margin-bottom: 0.5em;
+}
+
+.fourth .images {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+    padding: 0 3em;
+}
+
+.fourth .images .image {
+    width: 50%;
+}
+
+.fourth .images .image img {
+    width: 100%;
+    height: auto;
+}
+
+
+.about-us .about-us-header p {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.about-us main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-us .card {
+    
+    width: 70%;
+    margin-bottom: 2em;
+}
+
+.about-us .card main {
+    margin-top: -33px;
+    padding: 2em;
+    border: 0.3px solid gray;
+    border-radius: 0 0 7px 7px;
+    border-top: #FFFFFF;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.about-us .card header {
+    font-weight: bold;
+    margin-top: 0;
+    background-color: #84DCFF;
+    padding: 1.2em;
+    border-radius: 7px 7px 0 0;
+}
+
+.about-us .card header p{
+    padding-top: 5px;
+    text-align: left;
+}
