@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Inter;
+}
+
+body {
+    background-image: url('./images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.main {
+    padding: 2em 4em;
+}
+
+.main-article, .side-article {
+    background-color: white;
+}
+
+.main-article {
+    display: flex;
+    border: 1px solid red;
+    margin: 1em 0;
+}
+.main img {
+    width: 200px
+}
