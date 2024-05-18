@@ -1,15 +1,19 @@
 import UserListItem from "./UserListItem";
 import { useEffect, useState } from "react";
 import * as userService from "../services/userService";
-import CreateUserModal from "./createUserModal";
+import CreateUserModal from "./CreateUserModal";
+import UserInfoModal from "./UserInfoModal";
 
 const UserListTable = () => {
     const [users, setUsers] = useState([]);
-    const[showCreate, setShowCreate] = useState(false);
+    const [showCreate, setShowCreate] = useState(false);
+    const [showInfo, setShowInfo] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
 
     useEffect(() => {
         userService.getAll()
-            .then(result => setUsers(result));
+            .then(result => setUsers(result))
+            .catch(err => console.log(err));
     }, [])
 
     const createUserClickHandler = () => {
@@ -20,9 +24,46 @@ const UserListTable = () => {
         setShowCreate(false);
     }
 
+    const userCreateHandler = async (e) => {
+        //Stop page from reloading
+        e.preventDefault();
+
+        //Get data from form data
+        const data = Object.fromEntries(new FormData(e.currentTarget));
+
+        //Create new user at the server
+        const newUser = await userService.create(data);
+
+        //Add newly created user to the local state
+        setUsers(state => [...state, newUser]);
+
+        //Close the modal
+        hideCreateUserModal(false);
+    };
+
+    const userInfoClickHandler = async (userId) => {
+        const userDetails = await userService.getOne(userId);
+        setSelectedUser(userDetails);
+
+
+        setShowInfo(true);
+    }
+
+
+
     return (
         <div className="table-wrapper">
-            {showCreate && <CreateUserModal hideModal={hideCreateUserModal}/>}
+            {showCreate &&
+                <CreateUserModal
+                    hideModal={hideCreateUserModal}
+                    onUserCreate={userCreateHandler}
+                />}
+
+            {showInfo && <UserInfoModal
+                onClose={() => setShowInfo(false)}
+                userData={selectedUser}
+            />
+            }
 
             <table className="table">
                 <thead>
@@ -83,14 +124,17 @@ const UserListTable = () => {
                     {/* <!-- Table row component --> */}
                     {users.map(user => (
                         <UserListItem
-                            {...user} key={user._id}
+                            {...user}
+                            key={user._id}
+                            userId={user._id}
+                            onInfoClick={userInfoClickHandler}
                         />
                     ))}
                 </tbody>
             </table>
             <button className="btn-add btn" onClick={createUserClickHandler}>Add new user</button>
 
-            
+
         </div>
     )
 }
